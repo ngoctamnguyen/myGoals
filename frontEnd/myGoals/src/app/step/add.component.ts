@@ -41,7 +41,7 @@ export class AddComponent implements OnInit {
     title: ['', [Validators.required]],
     description: '',
     status: '',
-    deadline: 0
+    deadline: ''
   })
   step!: {
     title: any,
@@ -57,8 +57,10 @@ export class AddComponent implements OnInit {
       })
    }
 
-   dateToTimestamp(strDate: any){
-    var datum = Date.parse(strDate);
+   dateToTimestamp(strDate: string){
+    const date1 = strDate.split('-').join('/'); //convert yyyy-mm-dd to yyyy/mm/dd. https://medium.com/ngconf/angular-date-parsing-gotchas-83e3b811eb0a
+    let datum = Date.parse(date1);
+    console.log(datum)
     return datum;
    }
 

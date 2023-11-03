@@ -14,7 +14,7 @@ import { StepService } from './step.service';
       <div class="card-content">
         <div class="content">
           <p>Description: {{step.description}}</p>
-          <p>Deadline: {{step.deadline | date: 'dd/MM/yyyy'}}</p>
+          <p>Deadline: {{step.deadline | date}}</p>
           <p>Status: {{step.status}}</p>
         </div>
       </div>

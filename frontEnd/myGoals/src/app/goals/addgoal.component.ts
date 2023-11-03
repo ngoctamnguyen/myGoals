@@ -32,7 +32,7 @@ export class AddgoalComponent implements OnInit {
     description: '',
     deadline: 0
   }
-  
+
   constructor(private goalService: GoalsService) { }
 
   form = inject(FormBuilder).nonNullable.group({
@@ -40,22 +40,25 @@ export class AddgoalComponent implements OnInit {
     description: '',
     deadline: ''
   });
-  
-  ngOnInit(): void { 
+
+  ngOnInit(): void {
   }
 
-  dateToNumber(d: Date){
+  dateToNumber(d: Date) {
     let stringDate = d.toLocaleDateString('en-US')
     return Date.parse(stringDate);
   }
-  dateToTimestamp(strDate: string){
-    var datum = Date.parse(strDate);
-    return datum;
-   }
 
-   timestampToDate(strDate: number){
+  dateToTimestamp(strDate: string) {
+    const date1 = strDate.split('-').join('/'); //convert yyyy-mm-dd to yyyy/mm/dd. https://medium.com/ngconf/angular-date-parsing-gotchas-83e3b811eb0a
+    let datum = Date.parse(date1);
+    console.log(datum)
+    return datum;
+  }
+
+  timestampToDate(strDate: number) {
     return new Date(strDate).toLocaleDateString('en-US');
-   }
+  }
   submit() {
     const formdata = {
       title: this.form.get('title')!.value,
@@ -64,9 +67,9 @@ export class AddgoalComponent implements OnInit {
     };
 
     this.goalService.addGoal(formdata)
-    .subscribe(response => {
-      this.router.navigate(['', 'goals', 'list' ])
-    })
-    
+      .subscribe(response => {
+        this.router.navigate(['', 'goals', 'list'])
+      })
+
   }
 }
